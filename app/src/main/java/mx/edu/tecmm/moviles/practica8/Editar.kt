@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 
 class Editar : AppCompatActivity() {
 
@@ -24,15 +25,20 @@ class Editar : AppCompatActivity() {
         txtName = findViewById(R.id.txtName)
         txtPhoneNumber = findViewById(R.id.txtPhoneNomber)
 
-        val contact = ProvicionalData.listContact[position]
+        val contact = ArchivosControl.listContact[position]
         txtName.setText(contact.name)
         txtPhoneNumber.setText(contact.phoneNumber)
 
     }
     fun save(v: View) {
         val contact = Contact(txtName.text.toString(), txtPhoneNumber.text.toString())
-        ProvicionalData.listContact.set(position, contact)
-        Toast.makeText(this, "Se modifico", Toast.LENGTH_LONG).show()
+        ArchivosControl.listContact.set(position, contact)
+        val gson = Gson()
+        val control = ArchivosControl(this)
+        val contenido = gson.toJson(ArchivosControl.listContact)
+        val res = control.guardar(contenido)
+        val msg = if(res) "Datos Modificados" else "Error Modificar"
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
         finish()
     }
 }

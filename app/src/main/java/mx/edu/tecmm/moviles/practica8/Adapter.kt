@@ -3,7 +3,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.RecyclerView
 
 class Adapter (private var mainActivity: MainActivity)
@@ -16,15 +15,14 @@ class Adapter (private var mainActivity: MainActivity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderConcat {
-        val layoutItem = LayoutInflater.from(parent.context).inflate(
-            R.layout.contacto_item, parent, false)
+        val layoutItem = LayoutInflater.from(parent.context).inflate(R.layout.contacto_item, parent, false)
         return ViewHolderConcat(layoutItem)
     }
 
-    override fun getItemCount(): Int = ProvicionalData.listContact.size
+    override fun getItemCount(): Int = ArchivosControl.listContact.size
 
     override fun onBindViewHolder(holder: ViewHolderConcat, position: Int) {
-        val contact = ProvicionalData.listContact[position]
+        val contact = ArchivosControl.listContact[position]
         holder.txtName.text = contact.name
         holder.txtPhoneNumber.text = contact.phoneNumber
         holder.itemView.setOnClickListener {

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Practica8</string>
+    <string name="lb_title">Mis Contactos</string>
+    <string name="Ventana_add">Añadir nuevo contacto</string>
+    <string name="txtInput_name">Nombre del Contacto</string>
+    <string name="txtinput_telefono">Numero de Telefono</string>
+    <string name="btn_guardar">Guardar</string>
+</resources>

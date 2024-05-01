@@ -1,3 +1,3 @@
 package mx.edu.tecmm.moviles.practica8
 
-data class Contact (val name: String, val phoneNumber: String)
+data class Contact (val name: String, val phoneNumber: String, val id: Int)

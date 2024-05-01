@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,9 +32,37 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.w("Contact", "Hay ${ProvicionalData.listContact.size} register contact")
+
+        ProvicionalData.listContact.clear()
+
+        val bd = openOrCreateDatabase("MiBD", MODE_PRIVATE, null)
+
+        bd.execSQL("CREATE TABLE IF NOT EXISTS " +
+                "Contactos(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "nombre TEXT NOT NULL, telefono TEXT NOT NULL);")
+
+        val cursor = bd.rawQuery("SELECT * FROM Contactos", null)
+
+        while (cursor.moveToNext()){
+            val id = cursor.getInt(0)
+            val nombre = cursor.getString(1)
+            val telefono = cursor.getString(2)
+            val contacto = Contact(nombre, telefono, id)
+            ProvicionalData.listContact.add(contacto)
+
+        }
+
+        Log.w("Contactos", "Hay ${ProvicionalData.listContact.size} contactos")
+
+
+        val gson = Gson()
+        val contenido = gson.toJson(ProvicionalData.listContact)
+        Log.v("Pruebas", contenido)
+        bd.close()
+
         rcv.adapter = Adapter(this)
         rcv.layoutManager = LinearLayoutManager(this)
+
     }
 
     fun btnAdd(v: View) {
@@ -48,3 +77,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+
+
+
+

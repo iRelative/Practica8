@@ -5,4 +5,5 @@
     <string name="txtInput_name">Nombre del Contacto</string>
     <string name="txtinput_telefono">Numero de Telefono</string>
     <string name="btn_guardar">Guardar</string>
+    <string name="btn_delete">Borrar</string>
 </resources>

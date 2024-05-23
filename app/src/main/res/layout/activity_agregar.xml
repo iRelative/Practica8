@@ -66,17 +66,26 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="114dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:id="@+id/btnDelete"
+        android:layout_width="99dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/god"
-        android:onClick="save"
-        android:text="@string/btn_guardar"
-        android:textColorLink="@color/white"
-        app:cornerRadius="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/btn_delete"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="45dp"
+        android:backgroundTint="@color/god"
+        android:onClick="guardar"
+        android:text="@string/btn_guardar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
 

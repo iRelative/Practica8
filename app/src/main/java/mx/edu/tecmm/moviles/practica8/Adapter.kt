@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 class Adapter (private var mainActivity: MainActivity)
     : RecyclerView.Adapter<Adapter.ViewHolderConcat>() {
 
+    private var contactos: List<Contact> = emptyList()
+
     //Parte interna
     class ViewHolderConcat(item: View) : RecyclerView.ViewHolder(item) {
         var txtName: TextView = item.findViewById(R.id.txtNombre)
@@ -21,15 +23,21 @@ class Adapter (private var mainActivity: MainActivity)
         return ViewHolderConcat(layoutItem)
     }
 
-    override fun getItemCount(): Int = ProvicionalData.listContact.size
+    override fun getItemCount(): Int =  contactos.size
 
     override fun onBindViewHolder(holder: ViewHolderConcat, position: Int) {
-        val contact = ProvicionalData.listContact[position]
+        val contact = contactos[position]
         holder.txtName.text = contact.name
         holder.txtPhoneNumber.text = contact.phoneNumber
         holder.itemView.setOnClickListener {
             mainActivity.clickItem(position)
         }
+    }
+
+    // Método para actualizar la lista de contactos del adaptador
+    fun actualizarContactos(nuevosContactos: List<Contact>) {
+        contactos = nuevosContactos
+        notifyDataSetChanged()
     }
 
 }

@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintSet.Layout
 import androidx.recyclerview.widget.RecyclerView
 
-class Adapter (private var mainActivity: MainActivity)
+class Adapter (private var mainActivity: MainActivity, private var contactos: List<Contacto>)
     : RecyclerView.Adapter<Adapter.ViewHolderConcat>() {
 
     //Parte interna
@@ -21,12 +21,12 @@ class Adapter (private var mainActivity: MainActivity)
         return ViewHolderConcat(layoutItem)
     }
 
-    override fun getItemCount(): Int = ProvicionalData.listContact.size
+    override fun getItemCount(): Int = contactos.size
 
     override fun onBindViewHolder(holder: ViewHolderConcat, position: Int) {
-        val contact = ProvicionalData.listContact[position]
-        holder.txtName.text = contact.name
-        holder.txtPhoneNumber.text = contact.phoneNumber
+        val contacto = contactos[position]
+        holder.txtName.text = contacto.nombre
+        holder.txtPhoneNumber.text = contacto.telefono
         holder.itemView.setOnClickListener {
             mainActivity.clickItem(position)
         }

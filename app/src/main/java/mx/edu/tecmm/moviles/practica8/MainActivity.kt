@@ -10,6 +10,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,12 +34,32 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.w("Contact", "Hay ${ProvicionalData.listContact.size} register contact")
-        rcv.adapter = Adapter(this)
-        rcv.layoutManager = LinearLayoutManager(this)
+        val retrofit = RetrofitApp.getRetrofit()
+        val servicio = retrofit.create(IContacto::class.java)
+        val peticion: Call<List<Contacto>> = servicio.getContactos()
+
+        peticion.enqueue(object : Callback<List<Contacto>> {
+            override fun onResponse(call: Call<List<Contacto>>, response: Response<List<Contacto>>) {
+                val contactos = response.body() ?: emptyList()
+                Log.v("Respuesta", "Número de registros ${contactos.size}")
+
+                // Configurar el RecyclerView aquí
+                rcv.adapter = Adapter(this@MainActivity, contactos)
+                rcv.layoutManager = LinearLayoutManager(this@MainActivity)
+
+                // Almacena los contactos en ProvisionalDatos
+                ProvicionalData.listContact.clear()
+                ProvicionalData.listContact.addAll(contactos)
+                Log.d("CONTACTOS", "$contactos")
+            }
+
+            override fun onFailure(call: Call<List<Contacto>>, t: Throwable) {
+                Log.e("ERROR", t.message.toString())
+            }
+        })
     }
 
-    fun btnAdd(v: View) {
+    fun btnAgregar(v: View) {
         val intent = Intent(this, Agregar::class.java)
         startActivity(intent)
     }

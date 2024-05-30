@@ -8,6 +8,21 @@
     android:background="@drawable/colorfondo"
     tools:context=".Agregar">
 
+    <Button
+        android:id="@+id/btnEliminar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/god"
+        android:text="Eliminar"
+        android:textSize="18sp"
+        app:cornerRadius="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+
+        />
+
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
@@ -67,16 +82,17 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="114dp"
+        android:layout_width="0dp"
         android:layout_height="45dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="45dp"
         android:backgroundTint="@color/god"
-        android:onClick="save"
+        android:onClick="guardar"
         android:text="@string/btn_guardar"
         android:textColorLink="@color/white"
+        android:textSize="18sp"
         app:cornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
 

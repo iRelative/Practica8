@@ -25,7 +25,7 @@ class Agregar : AppCompatActivity() {
             insets
         }
     }
-    fun MGuardar(v: View){
+    fun guardar(v: View){
         val nombre = findViewById<EditText>(R.id.txtName).text.toString()
         val telefono = findViewById<EditText>(R.id.txtPhoneNomber).text.toString()
 
